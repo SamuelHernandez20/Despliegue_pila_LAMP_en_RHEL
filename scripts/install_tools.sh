@@ -53,13 +53,17 @@ chown -R apache:apache /var/www/html
 
 cp /var/www/html/phpmyadmin/config.sample.inc.php /var/www/html/phpmyadmin/config.inc.php
 
-
 # Generamos un valor aleatorio de 32 caracteres para la variable blowfish_secret
 RANDOM_VALUE=`openssl rand -hex 16`
 
-# Modificamos la variable blowfish_secret en el archivo de configuración
+# Modificamos la variable blowfish_secret para arreglar lo del cifrado
+# buscamos/reemplazamos con s/ "$cfg['blowfish_secret'] =" y le unimos el valor de RANDOM_VALUE, indicandoselo con "\1" en el archivo de configuración:
+
 sed -i "s/\(\$cfg\['blowfish_secret'\] =\).*/\1 '$RANDOM_VALUE';/" /var/www/html/phpmyadmin/config.inc.php
 
+# Busca la cadena blowfish_secret y con la expresión "a" debajo inserta $cfg\['TempDir'\] = '/tmp'; en el archivo de configuración:
+ 
+ sed -i "/blowfish_secret/a \$cfg\['TempDir'\] = '/tmp';" /var/www/html/phpmyadmin/config.inc.php 
 
 # Eliminar si existe alguna base de datos previa antes de importar la base de datos previa de phpmyadmin
 
