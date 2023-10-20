@@ -1,4 +1,4 @@
-# Practica_01--02
+# Practica_01-02
 
 ### L A M P  en RHEL
 
