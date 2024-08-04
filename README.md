@@ -1,5 +1,3 @@
-# Practica_01-02
-
 ### L A M P  en RHEL
 
 Para la realización de esta práctica se lanzará un nueva instancia en este caso de **RedHat** donde se hará la instalación de la pila en **RHEL**. Por ello el gestor de paquetes usado no será **apt** si no **dnf**.
